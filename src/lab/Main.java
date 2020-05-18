@@ -1,3 +1,4 @@
+package lab;
 import java.util.Scanner;
 
 public class Main {
@@ -21,6 +22,7 @@ public class Main {
 					stack.push(lineSplit[i]);
 				}
 				kernel.ExecuteCall(id);
+				
 				}
 			}
 		}

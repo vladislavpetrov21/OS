@@ -1,3 +1,4 @@
+package lab;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class Kernel {
 		
 		for (int i = arguments.size() - 1; i >= 0; i--) {
 			if (!stack.pop().equals(arguments.get(i))) {
-				System.out.print("Неверные аргументы \n");
+				System.out.print("Неверные аргумепппппппппппппппппппппппнты \n");
 				return;
 			}
 		}

@@ -1,10 +1,11 @@
+package lab;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ElStack {
 	private List stack = new ArrayList();
 
-	public void push(String element) {
+	public void push(Object element) {
 		stack.add(element);
 	}
 
