@@ -21,8 +21,7 @@ public class Main {
 					for (int i = 2; i < lineSplit.length; i++) {
 					stack.push(lineSplit[i]);
 				}
-				kernel.ExecuteCall(id);
-				
+				kernel.ExecuteCall(id);			
 				}
 			}
 		}

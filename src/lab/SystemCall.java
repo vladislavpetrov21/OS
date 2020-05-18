@@ -4,10 +4,10 @@ import java.util.List;
 
 public class SystemCall {
 	private String Name;
-    private List<String> Arguments;
+    private List<ArgType> Arguments;
+    private int argumentsSize;
 
-    public SystemCall(String name, String... args) {
-        Name = name;
+    public SystemCall(ArgType... args) {
         Arguments = Arrays.asList(args);
     }
 
@@ -15,24 +15,11 @@ public class SystemCall {
         return Name;
     }
 
-    public List getArgs(){
+    public List<ArgType> getArgs(){
         return Arguments;
     }
-
-    public String Execute(int id){
-        String string = "Call: " +  id + " - " + Name + " - ";
-        for (String i:Arguments) {
-            string += i + " ";
-        }
-        return string + "\n";
-    }
-
-    public String List()
-    {
-        String string = Name + " : ";
-        for (String i: Arguments) {
-            string += i + " ";
-        }
-        return string + "\n";
+    
+    public int getArgumentsSize() {
+        return argumentsSize;
     }
 }
