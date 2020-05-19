@@ -18,7 +18,7 @@ public class Main {
 					System.out.print("Неверная команда\n");
 				} else {
 					int id = Integer.parseInt(lineSplit[1]);
-					for (int i = 2; i < lineSplit.length; i++) {
+					for (int i = 0; i < lineSplit.length - 1; i++) {
 					stack.push(lineSplit[i]);
 				}
 				kernel.ExecuteCall(id);			

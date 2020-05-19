@@ -9,6 +9,7 @@ public class SystemCall {
 
     public SystemCall(ArgType... args) {
         Arguments = Arrays.asList(args);
+        argumentsSize = Arguments.size();
     }
 
     public String getName(){
