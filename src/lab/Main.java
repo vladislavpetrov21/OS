@@ -1,24 +1,20 @@
 package lab;
 
 public class Main {
-	private ElStack stackOfArg = new ElStack();
+	private ElStack arguments = new ElStack();
     private Kernel kernel;
 	public static void main(String[] args) {
         Main main = new Main();
-        main.fillingStack();
+        main.fill();
     }
 
-    public void fillingStack () {
-
-        ArgType firstArgument = new ArgType(123);
-        stackOfArg.push((int) firstArgument.getArgument());
-
-        ArgType secondArgument = new ArgType(2.3);
-        stackOfArg.push((double) secondArgument.getArgument());
-
-        ArgType thirdArgument = new ArgType("str");
-        stackOfArg.push((String) thirdArgument.getArgument());
-
-        kernel = new Kernel(stackOfArg);
+    public void fill() {
+        ArgType Arg1 = new ArgType(1);
+        arguments.push((int) Arg1.getArgument());
+        ArgType Arg2 = new ArgType(5.6);
+        arguments.push((double) Arg2.getArgument());
+        ArgType Arg3 = new ArgType("f");
+        arguments.push((String) Arg3.getArgument());
+        kernel = new Kernel(arguments);
     }
 }
