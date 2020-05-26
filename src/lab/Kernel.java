@@ -1,40 +1,61 @@
 package lab;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 public class Kernel {
-	ElStack stack;
-	public HashMap<Integer, SystemCall> SystemCalls;
+	private ElStack stack;
+    private HashMap<Integer, SystemCall> systemCalls = new HashMap<>();
 
-	public Kernel(ElStack stack)
-	{
-		this.stack = stack;
-		SystemCalls = new HashMap<>();
-		SystemCalls.put(0, new SystemCall(new ArgType(1), new ArgType(1.2), new ArgType("first")));
-		SystemCalls.put(1, new SystemCall(new ArgType(2), new ArgType(2.3), new ArgType("second")));
-		SystemCalls.put(2, new SystemCall(new ArgType(3), new ArgType(3.4), new ArgType("third")));
-		SystemCalls.put(3, new SystemCall(new ArgType(4), new ArgType(4.5), new ArgType("fourth")));
-		SystemCalls.put(4, new SystemCall(new ArgType(5), new ArgType(5.6), new ArgType("fifth")));
-	}
-	
-	public void ExecuteCall(int id){
-		 if (SystemCalls.containsKey(id)) {
-	            for (int i = SystemCalls.get(id).getArgumentsSize() - 1; i >= 0; i--) {
-	                if (!stack.pop().equals(SystemCalls.get(id).getArgs().get(i).getArgument())) {
-	                    System.out.println("аргументы не равны");
-	                    break;
-	                }
-	          }
-		 }
-	}
+    public Kernel(ElStack stack) {
+        this.stack = stack;
 
-	public void Calls()
-	{
-		for (int key : SystemCalls.keySet()) {
-			for (int i = 0; i < SystemCalls.get(key).getArgumentsSize(); i++) {
-                System.out.print(SystemCalls.get(key).getArgs().get(i).getArgument() + " ");
+        systemCalls.put(1, new SystemCall(new ArgType(123), new ArgType(2.3), new ArgType("str")));
+        systemCalls.put(2, new SystemCall(new ArgType(1), new ArgType(2.35)));
+        systemCalls.put(3, new SystemCall(new ArgType(69)));
+        systemCalls.put(4, new SystemCall(new ArgType(123), new ArgType(2.3), new ArgType("str")));
+        systemCalls.put(5, new SystemCall(new ArgType(123), new ArgType(2.3), new ArgType("line"), new ArgType("temp")));
+
+        getSystemCalls();
+
+        System.out.print("исполнить системный вызов по индексу: ");
+        Scanner scanner = new Scanner(System.in);
+        executeSystemCall(scanner.nextInt());
+    }
+
+    public void getSystemCalls() {
+        for (int key : systemCalls.keySet()) {
+            System.out.print("\nid: " + key + "\narguments: ");
+
+            for (int i = 0; i < systemCalls.get(key).getArgumentsSize(); i++) {
+                System.out.print(systemCalls.get(key).getArgs().get(i).getArgument() + " ");
             }
-			System.out.print("\n");
-		}
-	}
+            System.out.print("\n");
+        }
+    }
+
+    public void executeSystemCall(int key) {
+        if (systemCalls.containsKey(key)) {
+            System.out.println("\n[class Core / method executeSystemCall] проверка существования ключа в systemCalls: такой ключ существует");
+
+            boolean flag = true;
+            for (int i = systemCalls.get(key).getArgs().size() - 1; i >= 0; i--) {
+
+                if (!stack.pop().equals(systemCalls.get(key).getArgs().get(i).getArgument())) {
+                    System.out.println("\n[class Core / method executeSystemCall] проверка равенства stack'а и аргументов в аргументов в systemCall: аргументы не равны");
+                    flag = false;
+                    break;
+                }
+            }
+
+            if (flag) {
+                System.out.print("\nвыполнение системного вызова с id: " + key + "\narguments:");
+                for (int i = 0; i < systemCalls.get(key).getArgumentsSize(); i++) {
+                    System.out.print(" " + systemCalls.get(key).getArgs().get(i).getArgument());
+                }
+            }
+        } else {
+            System.out.println("\n[class Core / method executeSystemCall] проверка существования ключа в systemCalls: такой ключ не существует");
+        }
+    }
 }

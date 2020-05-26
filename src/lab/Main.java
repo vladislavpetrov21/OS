@@ -1,29 +1,24 @@
 package lab;
-import java.util.Scanner;
 
 public class Main {
-
+	private ElStack stackOfArg = new ElStack();
+    private Kernel kernel;
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		ElStack stack = new ElStack();
-		Kernel kernel = new Kernel(stack);
-		while(true){
-			String line = scanner.nextLine();
-			if (line.equals("all_calls")){
-				kernel.Calls();
-			}
-			else {
-				String[] lineSplit = line.split(" ");
-				if (!lineSplit[0].equals("system_call")) {
-					System.out.print("Неверная команда\n");
-				} else {
-					int id = Integer.parseInt(lineSplit[1]);
-					for (int i = 0; i < lineSplit.length - 1; i++) {
-					stack.push(lineSplit[i]);
-				}
-				kernel.ExecuteCall(id);			
-				}
-			}
-		}
-	}
+        Main main = new Main();
+        main.fillingStack();
+    }
+
+    public void fillingStack () {
+
+        ArgType firstArgument = new ArgType(123);
+        stackOfArg.push((int) firstArgument.getArgument());
+
+        ArgType secondArgument = new ArgType(2.3);
+        stackOfArg.push((double) secondArgument.getArgument());
+
+        ArgType thirdArgument = new ArgType("str");
+        stackOfArg.push((String) thirdArgument.getArgument());
+
+        kernel = new Kernel(stackOfArg);
+    }
 }
